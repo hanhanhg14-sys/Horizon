@@ -5,22 +5,19 @@
     "base_url": "https://open.bigmodel.cn/api/paas/v4",
     "api_key_env": "ZHIPU_API_KEY",
     "throttle_sec": 0,
-    "languages": ["zh", "en"],
-    "analysis_concurrency": 2,
-    "enrichment_concurrency": 2,
     "languages": [
       "zh",
       "en"
     ],
-    "analysis_concurrency": 5,
-    "enrichment_concurrency": 5
+    "analysis_concurrency": 2,
+    "enrichment_concurrency": 2
   },
   "processing": {
     "profiles_dir": "profiles",
     "default_profile": "tech-news",
     "profile_settings": {
       "tech-news": {
-        "threshold": 7.0,
+        "threshold": 6.0,
         "topic_dedup": true
       },
       "tech-blog": {
@@ -34,92 +31,159 @@
     }
   },
   "sources": {
-    "github": [
-      {
-        "type": "user_events",
-        "username": "karpathy",
-        "enabled": true,
-        "profile": "tech-news"
-      },
-      {
-        "type": "repo_releases",
-        "owner": "vllm-project",
-        "repo": "vllm",
-        "enabled": true,
-        "profile": "tech-news"
-      },
-      {
-        "type": "repo_releases",
-        "owner": "sgl-project",
-        "repo": "sglang",
-        "enabled": true,
-        "profile": "tech-news"
-      },
-      {
-        "type": "repo_releases",
-        "owner": "triton-lang",
-        "repo": "triton",
-        "enabled": true,
-        "profile": "tech-news"
-      }
-    ],
+    "github": [],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 150,
+      "min_score": 100,
       "profile": "tech-news"
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
+        "name": "CISA 全部安全公告",
+        "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
         "enabled": true,
-        "category": "ai-tools",
+        "category": "policy-advisory",
         "profile": "tech-news"
       },
       {
-        "name": "vLLM Blog",
-        "url": "https://vllm.ai/blog/rss.xml",
+        "name": "NIST Cybersecurity Insights",
+        "url": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",
         "enabled": true,
-        "category": "llm-inference",
-        "profile": "tech-blog",
-        "content_extractor": "trafilatura"
-      },
-      {
-        "name": "Sean Goedecke",
-        "url": "https://www.seangoedecke.com/rss.xml",
-        "enabled": true,
-        "category": "software-engineering",
-        "profile": "tech-blog",
-        "content_extractor": "trafilatura"
-      },
-      {
-        "name": "CNBC Finance",
-        "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
-        "enabled": true,
-        "category": "finance",
-        "profile": "finance-news",
-        "content_extractor": "trafilatura"
-      },
-      {
-        "name": "GitHub Trending - Daily",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
-        "enabled": true,
-        "category": "github-trending",
+        "category": "policy-advisory",
         "profile": "tech-news"
       },
       {
-        "name": "Semianalysis",
-        "url": "https://newsletter.semianalysis.com/feed",
+        "name": "ENISA 出版物",
+        "url": "https://www.enisa.europa.eu/publications/rss",
         "enabled": true,
-        "category": "semiconductors",
+        "category": "policy-advisory",
         "profile": "tech-news"
       },
       {
-        "name": "LWN.net",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
+        "name": "SANS ISC 日记",
+        "url": "https://isc.sans.edu/rssfeed_full.xml",
         "enabled": true,
-        "category": "linux-kernel",
+        "category": "incident-analysis",
+        "profile": "tech-news"
+      },
+      {
+        "name": "DysruptionHub 关键基础设施事件",
+        "url": "https://dysruptionhub.com/rss/",
+        "enabled": true,
+        "category": "critical-infrastructure",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Case Library 关键基础设施专项",
+        "url": "https://cybercaselibrary.com/feeds/critical-infrastructure.xml",
+        "enabled": true,
+        "category": "critical-infrastructure",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Case Library 勒索软件专项",
+        "url": "https://cybercaselibrary.com/feeds/ransomware.xml",
+        "enabled": true,
+        "category": "ransomware",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Case Library 国家级/APT专项",
+        "url": "https://cybercaselibrary.com/feeds/nation-state.xml",
+        "enabled": true,
+        "category": "apt-nation-state",
+        "profile": "tech-news"
+      },
+      {
+        "name": "cve.now 全部漏洞（含KEV/EPSS）",
+        "url": "https://cve.now/feed",
+        "enabled": true,
+        "category": "vulnerability",
+        "profile": "tech-news"
+      },
+      {
+        "name": "cve.now 新收录的 CISA KEV",
+        "url": "https://cve.now/feed?filter=kev",
+        "enabled": true,
+        "category": "vulnerability-kev",
+        "profile": "tech-news"
+      },
+      {
+        "name": "CIRCL NVD 最新CVE镜像",
+        "url": "https://vulnerability.circl.lu/recent/nvd.rss",
+        "enabled": true,
+        "category": "vulnerability",
+        "profile": "tech-news"
+      },
+      {
+        "name": "SecConHub 安全会议聚合",
+        "url": "https://conferences.seclens.info/rss/",
+        "enabled": true,
+        "category": "conference",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Bleeping Computer",
+        "url": "https://www.bleepingcomputer.com/feed/",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "The Hacker News",
+        "url": "https://feeds.feedburner.com/TheHackersNews",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Krebs on Security",
+        "url": "https://krebsonsecurity.com/feed/",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "CISA Advisories",
+        "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "SecurityWeek",
+        "url": "https://www.securityweek.com/feed/",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "Dark Reading",
+        "url": "https://www.darkreading.com/rss.xml",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "The Record",
+        "url": "https://therecord.media/feed",
+        "enabled": true,
+        "category": "cybersecurity",
+        "profile": "tech-news"
+      },
+      {
+        "name": "安全客",
+        "url": "https://api.anquanke.com/data/v1/rss",
+        "enabled": true,
+        "category": "cybersecurity-cn",
+        "profile": "tech-news"
+      },
+      {
+        "name": "FreeBuf",
+        "url": "https://www.freebuf.com/feed",
+        "enabled": true,
+        "category": "cybersecurity-cn",
         "profile": "tech-news"
       }
     ],
@@ -127,21 +191,39 @@
       "enabled": true,
       "subreddits": [
         {
-          "subreddit": "MachineLearning",
+          "subreddit": "netsec",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 60,
+          "fetch_limit": 15,
+          "min_score": 30,
           "profile": "tech-news"
         },
         {
-          "subreddit": "LocalLLaMA",
+          "subreddit": "cybersecurity",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 15,
+          "min_score": 30,
+          "profile": "tech-news"
+        },
+        {
+          "subreddit": "blueteamsec",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
           "fetch_limit": 10,
-          "min_score": 60,
+          "min_score": 20,
+          "profile": "tech-news"
+        },
+        {
+          "subreddit": "hacking",
+          "enabled": true,
+          "sort": "hot",
+          "time_filter": "day",
+          "fetch_limit": 10,
+          "min_score": 20,
           "profile": "tech-news"
         }
       ],
@@ -149,15 +231,8 @@
       "fetch_comments": 10
     },
     "telegram": {
-      "enabled": true,
-      "channels": [
-        {
-          "channel": "zaihuapd",
-          "enabled": true,
-          "fetch_limit": 20,
-          "profile": ["tech-news", "finance-news"]
-        }
-      ]
+      "enabled": false,
+      "channels": []
     }
   },
   "collection": {
