@@ -236,10 +236,10 @@
     }
   },
   "collection": {
-    "time_window_hours": 24
+    "time_window_hours": 6
   },
   "digest": {
-    "max_items": 50,
+    "max_items": 5,
     "profile_order": [
       "tech-news",
       "tech-blog",
