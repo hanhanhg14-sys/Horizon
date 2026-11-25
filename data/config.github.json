@@ -1,9 +1,9 @@
 {
   "ai": {
     "provider": "openai",
-    "model": "glm-5.3-flashx",
-    "base_url": "https://open.bigmodel.cn/api/paas/v4",
-    "api_key_env": "ZHIPU_API_KEY",
+    "model": "deepseek-v4-pro",
+    "base_url": "https://api.deepseek.com",
+    "api_key_env": "DEEPSEEK_API_KEY",
     "throttle_sec":1.0,
     "languages": [
       "zh",
