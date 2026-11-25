@@ -249,8 +249,21 @@
     "default_group": "other",
     "default_group_limit": null
   },
+  "email": {
+    "enabled": true,
+    "smtp_server": "smtp.qq.com",
+    "smtp_port": 465,
+    "imap_server": "imap.qq.com",
+    "imap_port": 993,
+    "username": "你的邮箱地址@qq.com",
+    "password_env": "SMTP_PASSWORD",
+    "email_address": "你的邮箱地址@qq.com",
+    "sender_name": "Horizon Daily",
+    "recipients": ["接收日报的邮箱地址@example.com"],
+    "use_tls": true
+  },
   "webhook": {
-    "enabled": false,
+    "enabled": true,
     "url_env": "HORIZON_WEBHOOK_URL",
     "delivery": "summary_and_items",
     "overview_position": "last",
